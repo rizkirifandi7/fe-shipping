@@ -15,6 +15,7 @@ const PageAdmin = () => {
 		{
 			accessorKey: "nama",
 			header: "Nama",
+			accessorFn: (row) => row.nama,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("nama")}</div>
 			),
@@ -22,6 +23,7 @@ const PageAdmin = () => {
 		{
 			accessorKey: "email",
 			header: "Email",
+			accessorFn: (row) => row.email,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("email")}</div>
 			),
@@ -29,6 +31,7 @@ const PageAdmin = () => {
 		{
 			accessorKey: "telepon",
 			header: "Telepon",
+			accessorFn: (row) => row.telepon,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("telepon")}</div>
 			),
@@ -36,6 +39,7 @@ const PageAdmin = () => {
 		{
 			accessorKey: "role",
 			header: "Role",
+			accessorFn: (row) => row.role,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("role")}</div>
 			),
@@ -91,7 +95,6 @@ const PageAdmin = () => {
 			error={error}
 			TambahComponent={<TambahAdmin onSuccess={fetchData} />}
 			title="Dashboard Admin"
-			searchKey="nama"
 		/>
 	);
 };

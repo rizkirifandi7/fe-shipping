@@ -2,7 +2,6 @@
 
 import { ChevronRight } from "lucide-react";
 import { usePathname } from "next/navigation";
-
 import {
 	Collapsible,
 	CollapsibleContent,
@@ -19,32 +18,32 @@ import {
 	SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 
-export function NavMain({ items }) {
+export function NavMain({ items, userRole }) {
 	const pathname = usePathname();
 
-	// Helper function to check if an item is active
 	const isItemActive = (itemUrl) => {
 		return pathname === itemUrl || pathname.startsWith(itemUrl + "/");
 	};
 
-	// Helper function to check if any submenu item is active
 	const hasActiveSubItem = (subItems) => {
 		if (!subItems) return false;
 		return subItems.some((subItem) => isItemActive(subItem.url));
 	};
 
+	const filteredItems = items.filter((item) => {
+		if (!item.allowedRoles) return true;
+		return item.allowedRoles.includes(userRole);
+	});
+
 	return (
 		<SidebarGroup>
 			<SidebarGroupLabel>Platform</SidebarGroupLabel>
 			<SidebarMenu className={"gap-y-2"}>
-				{items.map((item) => {
-					// Check if the item has submenu items
+				{filteredItems.map((item) => {
 					const hasSubItems = item.items && item.items.length > 0;
-					// Check if this item or any of its children is active
 					const isActive =
 						isItemActive(item.url) || hasActiveSubItem(item.items);
 
-					// If no submenu items, render a simple link
 					if (!hasSubItems) {
 						return (
 							<SidebarMenuItem key={item.title}>
@@ -62,7 +61,6 @@ export function NavMain({ items }) {
 						);
 					}
 
-					// If has submenu items, render a collapsible
 					return (
 						<Collapsible
 							key={item.title}
@@ -80,18 +78,24 @@ export function NavMain({ items }) {
 								</CollapsibleTrigger>
 								<CollapsibleContent>
 									<SidebarMenuSub>
-										{item.items.map((subItem) => (
-											<SidebarMenuSubItem key={subItem.title}>
-												<SidebarMenuSubButton
-													asChild
-													isActive={isItemActive(subItem.url)}
-												>
-													<a href={subItem.url}>
-														<span>{subItem.title}</span>
-													</a>
-												</SidebarMenuSubButton>
-											</SidebarMenuSubItem>
-										))}
+										{item.items
+											.filter(
+												(subItem) =>
+													!subItem.allowedRoles ||
+													subItem.allowedRoles.includes(userRole)
+											)
+											.map((subItem) => (
+												<SidebarMenuSubItem key={subItem.title}>
+													<SidebarMenuSubButton
+														asChild
+														isActive={isItemActive(subItem.url)}
+													>
+														<a href={subItem.url}>
+															<span>{subItem.title}</span>
+														</a>
+													</SidebarMenuSubButton>
+												</SidebarMenuSubItem>
+											))}
 									</SidebarMenuSub>
 								</CollapsibleContent>
 							</SidebarMenuItem>

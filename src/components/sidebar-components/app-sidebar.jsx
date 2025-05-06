@@ -1,9 +1,6 @@
+// components/AppSidebar.tsx
 "use client";
 
-import * as React from "react";
-
-import { TeamSwitcher } from "@/components/sidebar-components/team-switcher";
-import { NavMain } from "@/components/sidebar-components/nav-main";
 import {
 	Sidebar,
 	SidebarContent,
@@ -11,15 +8,17 @@ import {
 	SidebarRail,
 } from "@/components/ui/sidebar";
 import { dataNavLink } from "@/constant/navLinkData";
+import CompanyProfile from "./profile";
+import { NavMain } from "./nav-main";
 
-export function AppSidebar({ ...props }) {
+export function AppSidebar({ userRole, ...props }) {
 	return (
-		<Sidebar collapsible="icon" {...props} >
+		<Sidebar collapsible="icon" {...props}>
 			<SidebarHeader>
-				<TeamSwitcher teams={dataNavLink.teams} />
+				<CompanyProfile />
 			</SidebarHeader>
-			<SidebarContent >
-				<NavMain items={dataNavLink.navMain} />
+			<SidebarContent>
+				<NavMain items={dataNavLink.navMain} userRole={userRole} />
 			</SidebarContent>
 			<SidebarRail />
 		</Sidebar>

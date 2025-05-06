@@ -6,30 +6,11 @@ const produkFormSchema = z.object({
 	nama: z.string().min(1, "Nama produk harus diisi"),
 	deskripsi: z.string().min(1, "Deskripsi produk harus diisi"),
 	kategori: z.string().min(1, "Kategori produk harus diisi"),
-	harga: z
-		.string()
-		.min(1, "Harga produk harus diisi")
-		.regex(/^\d+$/, "Harga produk harus berupa angka"),
-	stok: z
-		.string()
-		.min(1, "Stok produk harus diisi")
-		.regex(/^\d+$/, "Stok produk harus berupa angka"),
-	tinggi: z
-		.string()
-		.min(1, "Tinggi produk harus diisi")
-		.regex(/^\d+$/, "Tinggi produk harus berupa angka"),
-	lebar: z
-		.string()
-		.min(1, "Lebar produk harus diisi")
-		.regex(/^\d+$/, "Lebar produk harus berupa angka"),
-	panjang: z
-		.string()
-		.min(1, "Panjang produk harus diisi")
-		.regex(/^\d+$/, "Panjang produk harus berupa angka"),
-	berat: z
-		.string()
-		.min(1, "Berat produk harus diisi")
-		.regex(/^\d+$/, "Berat produk harus berupa angka"),
+	harga: z.coerce.number().min(1, "Harga produk harus diisi"),
+	tinggi: z.coerce.number().min(1, "Tinggi produk harus diisi"),
+	lebar: z.coerce.number().min(1, "Lebar produk harus diisi"),
+	panjang: z.coerce.number().min(1, "Panjang produk harus diisi"),
+	berat: z.coerce.number().min(1, "Berat produk harus diisi"),
 	status: z.enum(["active", "inactive"]).optional(),
 	stackable: z.enum(["yes", "no"]).optional(),
 });
@@ -70,7 +51,6 @@ const TambahProduk = ({ onSuccess }) => {
 				deskripsi: "",
 				kategori: "",
 				harga: "",
-				stok: "",
 				tinggi: "",
 				lebar: "",
 				panjang: "",
@@ -107,12 +87,6 @@ const TambahProduk = ({ onSuccess }) => {
 					name: "harga",
 					label: "Harga",
 					placeholder: "Masukkan harga...",
-					fieldType: "input",
-				},
-				{
-					name: "stok",
-					label: "Stok",
-					placeholder: "Masukkan stok...",
 					fieldType: "input",
 				},
 				{

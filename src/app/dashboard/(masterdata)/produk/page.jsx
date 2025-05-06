@@ -6,7 +6,6 @@ import HapusProduk from "./components/hapus-produk";
 import UpdateProduk from "./components/update-produk";
 import TambahProduk from "./components/tambah-produk";
 
-
 const PageAdmin = () => {
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -16,6 +15,7 @@ const PageAdmin = () => {
 		{
 			accessorKey: "kode_produk",
 			header: "Kode Produk",
+			accessorFn: (row) => row.kode_produk,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("kode_produk")}</div>
 			),
@@ -23,6 +23,7 @@ const PageAdmin = () => {
 		{
 			accessorKey: "nama",
 			header: "Nama",
+			accessorFn: (row) => row.nama,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("nama")}</div>
 			),
@@ -30,6 +31,7 @@ const PageAdmin = () => {
 		{
 			accessorKey: "deskripsi",
 			header: "Deskripsi",
+			accessorFn: (row) => row.deskripsi,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("deskripsi")}</div>
 			),
@@ -37,6 +39,7 @@ const PageAdmin = () => {
 		{
 			accessorKey: "kategori",
 			header: "Kategori",
+			accessorFn: (row) => row.kategori,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("kategori")}</div>
 			),
@@ -44,20 +47,15 @@ const PageAdmin = () => {
 		{
 			accessorKey: "harga",
 			header: "Harga",
+			accessorFn: (row) => row.harga,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("harga")}</div>
 			),
 		},
 		{
-			accessorKey: "stok",
-			header: "Stok",
-			cell: ({ row }) => (
-				<div className="overflow-x-auto">{row.getValue("stok")}</div>
-			),
-		},
-		{
 			accessorKey: "panjang",
 			header: "Panjang",
+			accessorFn: (row) => row.panjang,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("panjang")}</div>
 			),
@@ -65,6 +63,7 @@ const PageAdmin = () => {
 		{
 			accessorKey: "lebar",
 			header: "Lebar",
+			accessorFn: (row) => row.lebar,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("lebar")}</div>
 			),
@@ -72,6 +71,7 @@ const PageAdmin = () => {
 		{
 			accessorKey: "tinggi",
 			header: "Tinggi",
+			accessorFn: (row) => row.tinggi,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("tinggi")}</div>
 			),
@@ -79,6 +79,7 @@ const PageAdmin = () => {
 		{
 			accessorKey: "berat",
 			header: "Berat",
+			accessorFn: (row) => row.berat,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("berat")}</div>
 			),
@@ -86,6 +87,7 @@ const PageAdmin = () => {
 		{
 			accessorKey: "stackable",
 			header: "Stackable",
+			accessorFn: (row) => row.stackable,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("stackable")}</div>
 			),
@@ -141,7 +143,6 @@ const PageAdmin = () => {
 			error={error}
 			TambahComponent={<TambahProduk onSuccess={fetchData} />}
 			title="Dashboard Produk"
-			searchKey="nama"
 		/>
 	);
 };

@@ -61,6 +61,7 @@ export default function TambahJadwalPage() {
     tgl_pengiriman: "",
     perkiraan_sampai: "",
     catatan: "",
+    nomor_dokumen: "",
     id_orders: [],
   });
   const [loading, setLoading] = useState(false);
@@ -77,7 +78,8 @@ export default function TambahJadwalPage() {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`);
       const data = await res.json();
-      setDrivers(data.data.filter(u => u.role === "driver"));
+      console.log(data.data);
+      setDrivers(data.data.filter(u => u.role === "driver" && u.status === "active"));
     } catch (error) {
       setErr("Gagal memuat data driver");
     }
@@ -319,6 +321,18 @@ export default function TambahJadwalPage() {
                       onChange={handleChange}
                       placeholder="Catatan tambahan (opsional)"
                       className="min-h-[100px]"
+                    />
+                  </div>
+
+                  {/* Nomor Surat Jalan */}
+                  <div className="space-y-2">
+                    <Label>Nomor Surat Jalan</Label>
+                    <Input
+                      type="text"
+                      name="nomor_dokumen"
+                      value={form.nomor_dokumen}
+                      onChange={handleChange}
+                      placeholder="Nomor dokumen (opsional)"
                     />
                   </div>
                 </div>

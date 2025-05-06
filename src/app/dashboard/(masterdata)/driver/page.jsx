@@ -15,6 +15,7 @@ const PageDriver = () => {
 		{
 			accessorKey: "nama",
 			header: "Nama",
+			accessorFn: (row) => row.nama,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("nama")}</div>
 			),
@@ -22,6 +23,7 @@ const PageDriver = () => {
 		{
 			accessorKey: "email",
 			header: "Email",
+			accessorFn: (row) => row.email,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("email")}</div>
 			),
@@ -29,6 +31,7 @@ const PageDriver = () => {
 		{
 			accessorKey: "telepon",
 			header: "Telepon",
+			accessorFn: (row) => row.telepon,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("telepon")}</div>
 			),
@@ -36,8 +39,17 @@ const PageDriver = () => {
 		{
 			accessorKey: "role",
 			header: "Role",
+			accessorFn: (row) => row.role,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("role")}</div>
+			),
+		},
+		{
+			accessorKey: "status",
+			header: "Status",
+			accessorFn: (row) => row.status,
+			cell: ({ row }) => (
+				<div className="overflow-x-auto">{row.getValue("status")}</div>
 			),
 		},
 		{
@@ -91,7 +103,6 @@ const PageDriver = () => {
 			error={error}
 			TambahComponent={<TambahDriver onSuccess={fetchData} />}
 			title="Dashboard Driver"
-			searchKey="nama"
 		/>
 	);
 };

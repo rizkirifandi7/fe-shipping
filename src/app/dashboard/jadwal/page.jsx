@@ -6,6 +6,8 @@ import { formatDateIndonesian } from "@/lib/formatDateIndonesia";
 import { Button } from "@/components/ui/button";
 import HapusJadwal from "./components/hapus-jadwal";
 import Link from "next/link";
+import { ArrowUpDown, PlusCircle } from "lucide-react";
+import UpdateJadwal from "./components/update-jadwal";
 
 const PageJadwal = () => {
 	const [data, setData] = useState([]);
@@ -40,10 +42,41 @@ const PageJadwal = () => {
 		},
 		{
 			accessorKey: "status",
-			header: "Status",
-			cell: ({ row }) => (
-				<div className="overflow-x-auto">{row.getValue("status")}</div>
-			),
+			header: ({ column }) => {
+				return (
+					<Button
+						variant="ghost"
+						onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+					>
+						Status
+						<ArrowUpDown />
+					</Button>
+				);
+			},
+			cell: ({ row }) => {
+				const status = row.getValue("status");
+				let colorClass = "bg-gray-200 text-gray-800 border";
+				let label = status;
+
+				if (status === "scheduled") {
+					colorClass = "bg-blue-100 text-blue-800 border border-blue-200";
+					label = "Terjadwal";
+				} else if (status === "in_transit") {
+					colorClass = "bg-yellow-100 text-yellow-800 border border-yellow-200";
+					label = "Dalam Perjalanan";
+				} else if (status === "completed") {
+					colorClass = "bg-green-100 text-green-800 border border-green-200";
+					label = "Selesai";
+				}
+
+				return (
+					<span
+						className={`px-3 py-1 rounded-full text-xs font-semibold capitalize ${colorClass}`}
+					>
+						{label}
+					</span>
+				);
+			},
 		},
 		{
 			accessorKey: "catatan",
@@ -66,7 +99,7 @@ const PageJadwal = () => {
 						>
 							Detail
 						</Link>
-						{/* <UpdateKendaraan onSuccess={fetchData} id={id} rowData={rowData} /> */}
+						<UpdateJadwal onSuccess={fetchData} id={id} rowData={rowData} />
 						<HapusJadwal id={id} onSuccess={fetchData} />
 					</div>
 				);
@@ -110,11 +143,13 @@ const PageJadwal = () => {
 				error={error}
 				TambahComponent={
 					<Link href="/dashboard/jadwal/tambah">
-						<Button>Tambah Jadwal</Button>
+						<Button>
+							<PlusCircle />
+							Tambah Jadwal
+						</Button>
 					</Link>
 				}
 				title="Dashboard Jadwal Pengiriman"
-				searchKey="tgl_pengiriman"
 			/>
 		</div>
 	);

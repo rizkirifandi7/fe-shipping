@@ -1,17 +1,26 @@
+// Di fungsi formatDateIndonesian
 export const formatDateIndonesian = (dateString) => {
-	if (!dateString) return "-";
+  if (!dateString) return "-";
+  
+  // Handle case where dateString is already a Date object
+  const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
+  
+  if (isNaN(date.getTime())) return "-";
 
-	const date = new Date(dateString);
-	const options = {
-		weekday: "long",
-		day: "numeric",
-		month: "long",
-		year: "numeric",
-	};
-	const formattedDate = date.toLocaleDateString("id-ID", options);
-
-	// Convert first letter to uppercase
-	return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+  const options = {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: 'Asia/Jakarta' // Tambahkan timezone khusus
+  };
+  
+  try {
+    const formattedDate = date.toLocaleDateString("id-ID", options);
+    return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+  } catch (e) {
+    return "-";
+  }
 };
 
 export const formatDateIndonesianShort = (dateString) => {
@@ -77,3 +86,8 @@ export const formatDateShortMonth = (dateString) => {
 	// Format as "DD-MMM-YYYY"
 	return `${day}-${month}-${year}`;
 };
+
+export function getDayName(date) {
+	const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+	return days[date.getDay()];
+}

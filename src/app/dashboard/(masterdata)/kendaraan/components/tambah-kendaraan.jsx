@@ -4,26 +4,11 @@ import GenericFormDialog from "@/components/input-form/text-input";
 const kendaraanFormSchema = z.object({
 	nama: z.string().min(1, "Nama kendaraan harus diisi"),
 	plat_nomor: z.string().min(1, "Plat nomor harus diisi"),
-	kapasitas_volume: z.coerce
-		.number()
-		.min(1, "Kapasitas volume harus diisi")
-		.int("Kapasitas volume harus berupa bilangan bulat"),
-	kapasitas_berat: z.coerce
-		.number()
-		.min(1, "Kapasitas berat harus diisi")
-		.int("Kapasitas berat harus berupa bilangan bulat"),
-	tinggi: z
-		.string()
-		.min(1, "Harga produk harus diisi")
-		.regex(/^\d+$/, "Harga produk harus berupa angka"),
-	lebar: z
-		.string()
-		.min(1, "Lebar produk harus diisi")
-		.regex(/^\d+$/, "Lebar produk harus berupa angka"),
-	panjang: z
-		.string()
-		.min(1, "Panjang produk harus diisi")
-		.regex(/^\d+$/, "Panjang produk harus berupa angka"),
+	kapasitas_berat: z.coerce.number().min(1, "Kapasitas berat harus diisi"),
+	tinggi: z.coerce.number().min(1, "Tinggi kendaraan harus diisi"),
+	lebar: z.coerce.number().min(1, "Lebar kendaraan harus diisi"),
+	panjang: z.coerce.number().min(1, "Panjang kendaraan harus diisi"),
+	status: z.enum(["active", "inactive"]),
 });
 
 const TambahKendaraan = ({ onSuccess }) => {
@@ -58,11 +43,11 @@ const TambahKendaraan = ({ onSuccess }) => {
 			defaultValues={{
 				nama: "",
 				plat_nomor: "",
-				kapasitas_volume: "",
 				kapasitas_berat: "",
 				tinggi: "",
 				lebar: "",
 				panjang: "",
+				status: "active",
 			}}
 			fields={[
 				{
@@ -76,12 +61,6 @@ const TambahKendaraan = ({ onSuccess }) => {
 					label: "Plat Nomor",
 					placeholder: "Masukkan plat nomor...",
 					fieldType: "input",
-				},
-				{
-					name: "kapasitas_volume",
-					label: "Kapasitas Volume",
-					placeholder: "Masukkan kapasitas volume...",
-					fieldType: "number",
 				},
 				{
 					name: "kapasitas_berat",
@@ -106,6 +85,16 @@ const TambahKendaraan = ({ onSuccess }) => {
 					label: "Panjang",
 					placeholder: "Masukkan panjang...",
 					fieldType: "input",
+				},
+				{
+					name: "status",
+					label: "Status",
+					placeholder: "Pilih status...",
+					fieldType: "select",
+					options: [
+						{ value: "active", label: "Aktif" },
+						{ value: "inactive", label: "Tidak Aktif" },
+					],
 				},
 			]}
 			onSubmit={handleSubmit}

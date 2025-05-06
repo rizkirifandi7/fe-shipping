@@ -25,7 +25,6 @@ const TableView = ({
 	columns,
 	data,
 	title,
-	searchKey,
 	TambahComponent,
 	pageSize = 10,
 	isLoading = false,
@@ -35,6 +34,7 @@ const TableView = ({
 	const [columnFilters, setColumnFilters] = useState([]);
 	const [columnVisibility, setColumnVisibility] = useState({});
 	const [rowSelection, setRowSelection] = useState({});
+	const [globalFilter, setGlobalFilter] = useState(""); // State untuk filter global
 
 	const table = useReactTable({
 		data,
@@ -52,14 +52,15 @@ const TableView = ({
 			columnFilters,
 			columnVisibility,
 			rowSelection,
+			globalFilter, // Tambahkan globalFilter ke state
 		},
+		onGlobalFilterChange: setGlobalFilter, // Handler untuk global filter
 		initialState: {
 			pagination: {
 				pageSize,
 			},
 		},
 	});
-
 	return (
 		<div className="w-full space-y-4 p-3 bg-white dark:bg-gray-900">
 			<div className="flex items-center justify-between border-b pb-2">
@@ -69,10 +70,8 @@ const TableView = ({
 			<div className="flex items-center justify-between gap-2">
 				<Input
 					placeholder="Cari data..."
-					value={table.getColumn(searchKey)?.getFilterValue() ?? ""}
-					onChange={(e) =>
-						table.getColumn(searchKey)?.setFilterValue(e.target.value)
-					}
+					value={globalFilter ?? ""}
+					onChange={(e) => setGlobalFilter(e.target.value)}
 					className="max-w-sm shadow"
 					disabled={isLoading}
 				/>

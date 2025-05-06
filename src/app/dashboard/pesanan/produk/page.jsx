@@ -103,25 +103,31 @@ const PageProduk = () => {
 			toast("Tidak ada item dalam keranjang");
 			return;
 		}
-	
+
 		if (!formData.id_customer) {
 			toast("Customer harus dipilih");
 			return;
 		}
-	
+
 		if (!formData.tanggal_order) {
 			toast("Tanggal pengiriman tidak boleh kosong");
 			return;
 		}
-	
+
 		// Hitung total harga dari keranjang produk
-		const totalHarga = cartProduk.reduce((acc, item) => acc + (item.harga * item.quantity), 0);
-		const jumlahProduk = cartProduk.reduce((acc, item) => acc + item.quantity, 0);
-	
+		const totalHarga = cartProduk.reduce(
+			(acc, item) => acc + item.harga * item.quantity,
+			0
+		);
+		const jumlahProduk = cartProduk.reduce(
+			(acc, item) => acc + item.quantity,
+			0
+		);
+
 		setLoading(true);
 		try {
 			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_API_URL}/order/produk`, 
+				`${process.env.NEXT_PUBLIC_API_URL}/order/produk`,
 				{
 					method: "POST",
 					headers: {
@@ -137,19 +143,21 @@ const PageProduk = () => {
 						produk: cartProduk.map((item) => ({
 							id_produk: item.id,
 							jumlah: item.quantity,
-							harga: item.harga, 
+							harga: item.harga,
 						})),
 					}),
 				}
 			);
-	
+
 			const result = await response.json();
-	
+
 			if (response.ok) {
 				clearCart();
 				toast("Pesanan berhasil dibuat");
 			} else {
-				throw new Error(result.error || result.message || "Gagal membuat pesanan");
+				throw new Error(
+					result.error || result.message || "Gagal membuat pesanan"
+				);
 			}
 		} catch (error) {
 			console.error("Error order produk:", error);
@@ -158,12 +166,11 @@ const PageProduk = () => {
 			setLoading(false);
 		}
 	};
-	
 
 	return (
 		<div className="p-4">
 			<Link href="/dashboard/pesanan">
-				<Button className="mb-4">
+				<Button variant={"outline"} className="mb-4">
 					Kembali
 				</Button>
 			</Link>

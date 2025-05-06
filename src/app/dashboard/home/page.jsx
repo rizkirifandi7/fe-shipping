@@ -1,11 +1,15 @@
+import { cookies } from "next/headers";
 import React from "react";
+import MainPageAdmin from "./components/home-admin";
+import MainPageDriver from "./components/home-driver";
 
-const MainPage = () => {
+const PageHome = () => {
+	const userRole = cookies().get("userRole")?.value;
 	return (
-		<div className="">
-			<p className="text-2xl font-bold">Home</p>
+		<div>
+			{userRole === "admin" ? <MainPageAdmin /> : <MainPageDriver />}
 		</div>
 	);
 };
 
-export default MainPage;
+export default PageHome;

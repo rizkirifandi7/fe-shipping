@@ -21,6 +21,16 @@
 	--color-chart-3: var(--chart-3);
 	--color-chart-2: var(--chart-2);
 	--color-chart-1: var(--chart-1);
+	--color-pending: #0088fe;
+	--color-scheduled: #00c49f;
+	--color-completed: #ffbb28;
+	--color-vehicle1: #8884d8;
+	--color-vehicle2: #82ca9d;
+	--color-vehicle3: #ff8042;
+	--color-product1: #ff6b6b;
+	--color-product2: #4ecdc4;
+	--color-product3: #45a7e6;
+	--color-orders: #a45db1;
 	--color-ring: var(--ring);
 	--color-input: var(--input);
 	--color-border: var(--border);
@@ -41,24 +51,24 @@
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
+	--animate-accordion-down: accordion-down 0.2s ease-out;
+	--animate-accordion-up: accordion-up 0.2s ease-out;
 
-  @keyframes accordion-down {
-    from {
-      height: 0;
+	@keyframes accordion-down {
+		from {
+			height: 0;
 		}
-    to {
-      height: var(--radix-accordion-content-height);
+		to {
+			height: var(--radix-accordion-content-height);
 		}
 	}
 
-  @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
+	@keyframes accordion-up {
+		from {
+			height: var(--radix-accordion-content-height);
 		}
-    to {
-      height: 0;
+		to {
+			height: 0;
 		}
 	}
 }
@@ -96,6 +106,16 @@
 	--sidebar-accent-foreground: oklch(0.205 0 0);
 	--sidebar-border: oklch(0.922 0 0);
 	--sidebar-ring: oklch(0.708 0 0);
+	--color-pending: #0088fe;
+	--color-scheduled: #00c49f;
+	--color-completed: #ffbb28;
+	--color-vehicle1: #8884d8;
+	--color-vehicle2: #82ca9d;
+	--color-vehicle3: #ff8042;
+	--color-product1: #ff6b6b;
+	--color-product2: #4ecdc4;
+	--color-product3: #45a7e6;
+	--color-orders: #a45db1;
 }
 
 .dark {
@@ -133,11 +153,11 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+	* {
+		@apply border-border outline-ring/50;
 	}
-  body {
-    @apply bg-background text-foreground;
+	body {
+		@apply bg-background text-foreground;
 	}
 }
 

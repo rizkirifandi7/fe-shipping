@@ -15,6 +15,7 @@ const PageDriver = () => {
 		{
 			accessorKey: "nama",
 			header: "Nama",
+			accessorFn: (row) => row.nama,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("nama")}</div>
 			),
@@ -22,6 +23,7 @@ const PageDriver = () => {
 		{
 			accessorKey: "plat_nomor",
 			header: "Plat Nomor",
+			accessorFn: (row) => row.plat_nomor,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("plat_nomor")}</div>
 			),
@@ -29,6 +31,7 @@ const PageDriver = () => {
 		{
 			accessorKey: "panjang",
 			header: "Panjang",
+			accessorFn: (row) => row.panjang,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("panjang")}</div>
 			),
@@ -36,6 +39,7 @@ const PageDriver = () => {
 		{
 			accessorKey: "lebar",
 			header: "Lebar",
+			accessorFn: (row) => row.lebar,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("lebar")}</div>
 			),
@@ -43,6 +47,7 @@ const PageDriver = () => {
 		{
 			accessorKey: "tinggi",
 			header: "Tinggi",
+			accessorFn: (row) => row.tinggi,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("tinggi")}</div>
 			),
@@ -50,6 +55,7 @@ const PageDriver = () => {
 		{
 			accessorKey: "kapasitas_berat",
 			header: "Kapasitas Berat",
+			accessorFn: (row) => row.kapasitas_berat,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("kapasitas_berat")}</div>
 			),
@@ -57,10 +63,19 @@ const PageDriver = () => {
 		{
 			accessorKey: "kapasitas_volume",
 			header: "Kapasitas Volume",
+			accessorFn: (row) => row.kapasitas_volume,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">
 					{row.getValue("kapasitas_volume")}
 				</div>
+			),
+		},
+		{
+			accessorKey: "status",
+			header: "Status",
+			accessorFn: (row) => row.status,
+			cell: ({ row }) => (
+				<div className="overflow-x-auto">{row.getValue("status")}</div>
 			),
 		},
 		{
@@ -114,7 +129,6 @@ const PageDriver = () => {
 			error={error}
 			TambahComponent={<TambahKendaraan onSuccess={fetchData} />}
 			title="Dashboard Kendaraan"
-			searchKey="nama"
 		/>
 	);
 };

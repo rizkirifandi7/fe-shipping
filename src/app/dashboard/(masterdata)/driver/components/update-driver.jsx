@@ -22,6 +22,7 @@ const roleFormSchema = z
 			.max(15, "Nomor telepon maksimal 15 digit")
 			.regex(/^\+?\d+$/, "Format nomor telepon tidak valid"),
 		role: z.enum(["admin", "driver"]),
+		status: z.enum(["active", "inactive"]),
 	})
 	.refine((data) => data.password === data.retypePassword, {
 		message: "Password tidak sama",
@@ -72,6 +73,7 @@ const UpdateDriver = ({ onSuccess, id, rowData }) => {
 				retypePassword: "",
 				telepon: rowData.telepon || "",
 				role: rowData.role || "",
+				status: rowData.status || "active",
 			}}
 			fields={[
 				{
@@ -114,6 +116,16 @@ const UpdateDriver = ({ onSuccess, id, rowData }) => {
 					options: [
 						{ value: "admin", label: "Admin" },
 						{ value: "driver", label: "Driver" },
+					],
+				},
+				{
+					name: "status",
+					label: "Status",
+					placeholder: "Pilih status...",
+					fieldType: "select",
+					options: [
+						{ value: "active", label: "Aktif" },
+						{ value: "inactive", label: "Tidak Aktif" },
 					],
 				},
 			]}

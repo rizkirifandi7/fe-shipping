@@ -16,6 +16,7 @@ const PageCustomer = () => {
 		{
 			accessorKey: "kode_customer",
 			header: "Kode Customer",
+			accessorFn: (row) => row.kode_customer,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("kode_customer")}</div>
 			),
@@ -23,6 +24,7 @@ const PageCustomer = () => {
 		{
 			accessorKey: "nama",
 			header: "Nama",
+			accessorFn: (row) => row.nama,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("nama")}</div>
 			),
@@ -30,6 +32,7 @@ const PageCustomer = () => {
 		{
 			accessorKey: "email",
 			header: "Email",
+			accessorFn: (row) => row.email,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("email")}</div>
 			),
@@ -37,6 +40,7 @@ const PageCustomer = () => {
 		{
 			accessorKey: "telepon",
 			header: "Telepon",
+			accessorFn: (row) => row.telepon,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("telepon")}</div>
 			),
@@ -44,20 +48,25 @@ const PageCustomer = () => {
 		{
 			accessorKey: "alamat",
 			header: "Alamat",
+			accessorFn: (row) => row.alamat,
 			cell: ({ row }) => (
-				<div className="overflow-x-auto">{row.getValue("alamat")}</div>
+				<div className="overflow-x-auto w-[200px]">
+					{row.getValue("alamat")}
+				</div>
 			),
 		},
 		{
 			accessorKey: "kota",
 			header: "Kota",
+			accessorFn: (row) => row.kota,
 			cell: ({ row }) => (
-				<div className="overflow-x-auto">{row.getValue("kota")}</div>
+				<div className="overflow-x-auto ">{row.getValue("kota")}</div>
 			),
 		},
 		{
 			accessorKey: "provinsi",
 			header: "Provinsi",
+			accessorFn: (row) => row.provinsi,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("provinsi")}</div>
 			),
@@ -65,6 +74,7 @@ const PageCustomer = () => {
 		{
 			accessorKey: "kode_pos",
 			header: "Kode Pos",
+			accessorFn: (row) => row.kode_pos,
 			cell: ({ row }) => (
 				<div className="overflow-x-auto">{row.getValue("kode_pos")}</div>
 			),
@@ -120,7 +130,6 @@ const PageCustomer = () => {
 			error={error}
 			TambahComponent={<TambahCustomer onSuccess={fetchData} />}
 			title="Dashboard Customer"
-			searchKey="nama"
 		/>
 	);
 };

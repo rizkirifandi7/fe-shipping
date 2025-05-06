@@ -3,6 +3,7 @@
 import { setCookie, removeCookie, getCookie } from "@/lib/cookies";
 import { redirect } from "next/navigation";
 
+// actions/auth.js
 export const loginAction = async (prevState, formData) => {
 	try {
 		const email = formData.get("email");
@@ -30,12 +31,22 @@ export const loginAction = async (prevState, formData) => {
 		}
 
 		await setCookie("token", data.data.token, {
-			maxAge: 60 * 60 * 6, // 6 jam
+			maxAge: 60 * 60 * 6,
 			httpOnly: true,
 			sameSite: "strict",
 		});
 
-		return { success: true, role: data.role, error: null };
+		await setCookie("userRole", data.data.role, {
+			maxAge: 60 * 60 * 6,
+			httpOnly: true,
+			sameSite: "strict",
+		});
+
+		return {
+			success: true,
+			role: data.data.role,
+			error: null,
+		};
 	} catch (error) {
 		return { success: false, error: error.message, role: null };
 	}
