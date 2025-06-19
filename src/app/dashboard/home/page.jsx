@@ -3,11 +3,16 @@ import React from "react";
 import MainPageAdmin from "./components/home-admin";
 import MainPageDriver from "./components/home-driver";
 
-const PageHome = () => {
-	const userRole = cookies().get("userRole")?.value;
+const PageHome = async () => {
+	const userRole = (await cookies()).get("userRole")?.value;
+
 	return (
 		<div>
-			{userRole === "admin" ? <MainPageAdmin /> : <MainPageDriver />}
+			{userRole === "admin" || "manager" ? (
+				<MainPageAdmin />
+			) : (
+				<MainPageDriver />
+			)}
 		</div>
 	);
 };

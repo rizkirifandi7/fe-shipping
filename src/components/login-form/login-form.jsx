@@ -1,4 +1,5 @@
 "use client";
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -29,10 +30,15 @@ export function LoginForm({ className, ...props }) {
 	useEffect(() => {
 		if (state?.success) {
 			toast.success("Login successful!");
-			if (state.role === "admin") {
-				router.push("/dashboard/home");
-			} else if (state.role === "driver") {
-				router.push("/dashboard/home");
+			const roleRedirectMap = {
+				admin: "/dashboard/home",
+				manager: "/dashboard/home",
+				driver: "/dashboard/home",
+			};
+
+			const redirectPath = roleRedirectMap[state.role];
+			if (redirectPath) {
+				router.push(redirectPath);
 			} else {
 				toast.error("Unrecognized role");
 			}
@@ -55,11 +61,11 @@ export function LoginForm({ className, ...props }) {
 					<div className="flex justify-center mb-2">
 						<div className="bg-white rounded-full p-4 shadow-md border">
 							<Image
-								src="/logobrand.png" // Replace with your logo path
+								src="/logobrand.png"
 								alt="Company Logo"
-								width={80}
-								height={80}
-								className="object-contain"
+								width={40}
+								height={40}
+								className="object-cover"
 							/>
 						</div>
 					</div>
@@ -80,37 +86,27 @@ export function LoginForm({ className, ...props }) {
 
 					<form action={formAction}>
 						<div className="flex flex-col gap-5">
-							<div className="grid gap-2">
-								<Label htmlFor="email" className="text-gray-700">
-									Email
-								</Label>
-								<Input
-									id="email"
-									name="email"
-									type="email"
-									placeholder="your@email.com"
-									aria-invalid={!!state?.fieldErrors?.email}
-									className="py-4 border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-								/>
-							</div>
-
-							<div className="grid gap-2">
-								<Label htmlFor="password" className="text-gray-700">
-									Password
-								</Label>
-								<Input
-									id="password"
-									name="password"
-									type="password"
-									placeholder="••••••••"
-									aria-invalid={!!state?.fieldErrors?.password}
-									className="py-4 border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-								/>
-							</div>
+							{["email", "password"].map((field) => (
+								<div key={field} className="grid gap-2">
+									<Label htmlFor={field} className="text-gray-700">
+										{field.charAt(0).toUpperCase() + field.slice(1)}
+									</Label>
+									<Input
+										id={field}
+										name={field}
+										type={field}
+										placeholder={
+											field === "email" ? "example@email.com" : "••••••••"
+										}
+										aria-invalid={!!state?.fieldErrors?.[field]}
+										className="py-4 border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+									/>
+								</div>
+							))}
 
 							<Button
 								type="submit"
-								className="w-full py-4 text-base font-medium"
+								className="w-full py-4 text-sm font-medium"
 								disabled={isPending}
 							>
 								{isPending ? (
@@ -119,7 +115,7 @@ export function LoginForm({ className, ...props }) {
 										Signing in...
 									</>
 								) : (
-									"Sign In"
+									"Login"
 								)}
 							</Button>
 						</div>

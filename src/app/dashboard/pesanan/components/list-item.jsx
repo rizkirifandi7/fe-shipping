@@ -16,19 +16,21 @@ const ListItem = ({ data, removeItemFromCart }) => {
 							<div className="flex items-center gap-2 mt-1">
 								<p className="text-sm font-bold">{formatUangIDR(item.harga)}</p>
 								<span className="text-sm">× {item.quantity}</span>
-								<p className="text-sm font-bold ml-auto">
-									{formatUangIDR(item.harga * item.quantity)}
-								</p>
 							</div>
 						</div>
-						<Button
-							variant="ghost"
-							size="sm"
-							className="h-8 w-8 p-0 text-destructive hover:text-destructive"
-							onClick={() => removeItemFromCart(item)}
-						>
-							<FiTrash2 className="h-4 w-4" />
-						</Button>
+						<div className="flex flex-col items-end gap-y-4">
+							<Button
+								variant="ghost"
+								size="sm"
+								className="h-8 w-8 p-0 text-destructive hover:text-destructive"
+								onClick={() => removeItemFromCart(item)}
+							>
+								<FiTrash2 className="h-4 w-4" />
+							</Button>
+							<p className="text-sm font-bold ml-auto">
+								{formatUangIDR(item.harga * item.quantity)}
+							</p>
+						</div>
 					</div>
 				</Card>
 			))}

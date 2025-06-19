@@ -6,7 +6,6 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 import React from "react";
 import { CartProdukProvider } from "@/hooks/use-cart-produk";
-import { cookies } from "next/headers";
 
 export const metadata = {
 	title: "Dashboard | Shipper",
@@ -32,11 +31,10 @@ export const metadata = {
 };
 
 const DashboardLayout = ({ children }) => {
-	const userRole = cookies().get("userRole")?.value;
 	return (
 		<SidebarProvider>
 			<Toaster />
-			<AppSidebar userRole={userRole} />
+			<AppSidebar />
 			<SidebarInset>
 				<HeaderSidebar />
 				<div className="p-4">

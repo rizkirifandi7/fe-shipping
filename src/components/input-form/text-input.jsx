@@ -89,6 +89,15 @@ const GenericFormDialog = ({
 
 	const renderFormControl = (field, renderField) => {
 		switch (field.fieldType || "input") {
+			case "password":
+				return (
+					<Input
+						type="password"
+						placeholder={field.placeholder}
+						{...renderField}
+						onChange={(e) => renderField.onChange(e.target.value)}
+					/>
+				);
 			case "select":
 				return (
 					<Select
@@ -289,9 +298,9 @@ const GenericFormDialog = ({
 											<FormLabel>{field.label}</FormLabel>
 										)}
 										{renderFormControl(field, renderField)}
-										{field.description && (
+										{field.deskripsi && (
 											<FormDescription>
-												{field.description}
+												{field.deskripsi}
 												{field.link && (
 													<Link
 														href={field.link.href}

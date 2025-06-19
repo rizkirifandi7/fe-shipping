@@ -1,4 +1,3 @@
-// components/AppSidebar.tsx
 "use client";
 
 import {
@@ -11,14 +10,14 @@ import { dataNavLink } from "@/constant/navLinkData";
 import CompanyProfile from "./profile";
 import { NavMain } from "./nav-main";
 
-export function AppSidebar({ userRole, ...props }) {
+export function AppSidebar({ ...props }) {
 	return (
 		<Sidebar collapsible="icon" {...props}>
 			<SidebarHeader>
 				<CompanyProfile />
 			</SidebarHeader>
 			<SidebarContent>
-				<NavMain items={dataNavLink.navMain} userRole={userRole} />
+				<NavMain items={dataNavLink.navMain} />
 			</SidebarContent>
 			<SidebarRail />
 		</Sidebar>

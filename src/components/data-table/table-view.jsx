@@ -64,7 +64,7 @@ const TableView = ({
 	return (
 		<div className="w-full space-y-4 p-3 bg-white dark:bg-gray-900">
 			<div className="flex items-center justify-between border-b pb-2">
-				<h1 className="text-xl font-semibold">{title}</h1>
+				<h1 className="text-2xl font-bold">{title}</h1>
 			</div>
 
 			<div className="flex items-center justify-between gap-2">

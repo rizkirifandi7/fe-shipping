@@ -11,7 +11,7 @@ const roleFormSchema = z.object({
 		.min(10, "Nomor telepon minimal 10 digit")
 		.max(15, "Nomor telepon maksimal 15 digit")
 		.regex(/^\+?\d+$/, "Format nomor telepon tidak valid"),
-	role: z.enum(["admin", "driver"]),
+	role: z.enum(["admin", "driver", "manager"]),
 });
 
 const TambahAdmin = ({ onSuccess }) => {
@@ -41,9 +41,9 @@ const TambahAdmin = ({ onSuccess }) => {
 			dialogClassName="max-h-[80dvh] overflow-y-auto sm:max-w-[800px]"
 			formClassName="grid grid-cols-1 md:grid-cols-2 gap-4"
 			triggerVariant="add"
-			triggerText="Tambah Admin"
-			dialogTitle="Tambah Admin"
-			dialogDescription="Tambahkan admin baru."
+			triggerText="Tambah Pengguna"
+			dialogTitle="Tambah Pengguna"
+			dialogDescription="Tambahkan pengguna baru."
 			formSchema={roleFormSchema}
 			defaultValues={{
 				nama: "",
@@ -70,13 +70,13 @@ const TambahAdmin = ({ onSuccess }) => {
 					name: "password",
 					label: "Password",
 					placeholder: "Masukkan password...",
-					fieldType: "input",
+					fieldType: "password",
 				},
 				{
 					name: "retypePassword",
 					label: "RetypePassword",
 					placeholder: "Masukkan retypePassword...",
-					fieldType: "input",
+					fieldType: "password",
 				},
 				{
 					name: "telepon",
@@ -91,6 +91,7 @@ const TambahAdmin = ({ onSuccess }) => {
 					fieldType: "select",
 					options: [
 						{ value: "admin", label: "Admin" },
+						{ value: "manager", label: "Manager" },
 						{ value: "driver", label: "Driver" },
 					],
 				},

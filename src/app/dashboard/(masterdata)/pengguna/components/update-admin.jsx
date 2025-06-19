@@ -21,7 +21,7 @@ const roleFormSchema = z
 			.min(10, "Nomor telepon minimal 10 digit")
 			.max(15, "Nomor telepon maksimal 15 digit")
 			.regex(/^\+?\d+$/, "Format nomor telepon tidak valid"),
-		role: z.enum(["admin", "driver"]),
+		role: z.enum(["admin", "driver", "manager"]),
 	})
 	.refine((data) => data.password === data.retypePassword, {
 		message: "Password tidak sama",
@@ -62,8 +62,8 @@ const UpdateAdmin = ({ onSuccess, id, rowData }) => {
 			dialogClassName="max-h-[80dvh] overflow-y-auto sm:max-w-[800px]"
 			formClassName="grid grid-cols-1 md:grid-cols-2 gap-4"
 			triggerVariant="edit"
-			dialogTitle="Update Admin"
-			dialogDescription="Update admin."
+			dialogTitle="Update Pengguna"
+			dialogDescription="Update pengguna."
 			formSchema={roleFormSchema}
 			defaultValues={{
 				nama: rowData.nama || "",
@@ -71,7 +71,7 @@ const UpdateAdmin = ({ onSuccess, id, rowData }) => {
 				password: "",
 				retypePassword: "",
 				telepon: rowData.telepon || "",
-				role: rowData.role || "",
+				role: rowData.role.toString() || "",
 			}}
 			fields={[
 				{
@@ -114,6 +114,7 @@ const UpdateAdmin = ({ onSuccess, id, rowData }) => {
 					options: [
 						{ value: "admin", label: "Admin" },
 						{ value: "driver", label: "Driver" },
+						{ value: "manager", label: "Manager" },
 					],
 				},
 			]}

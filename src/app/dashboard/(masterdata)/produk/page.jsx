@@ -57,7 +57,7 @@ const PageAdmin = () => {
 			header: "Panjang",
 			accessorFn: (row) => row.panjang,
 			cell: ({ row }) => (
-				<div className="overflow-x-auto">{row.getValue("panjang")}</div>
+				<div className="overflow-x-auto">{row.getValue("panjang")}m</div>
 			),
 		},
 		{
@@ -65,7 +65,7 @@ const PageAdmin = () => {
 			header: "Lebar",
 			accessorFn: (row) => row.lebar,
 			cell: ({ row }) => (
-				<div className="overflow-x-auto">{row.getValue("lebar")}</div>
+				<div className="overflow-x-auto">{row.getValue("lebar")}m</div>
 			),
 		},
 		{
@@ -73,7 +73,7 @@ const PageAdmin = () => {
 			header: "Tinggi",
 			accessorFn: (row) => row.tinggi,
 			cell: ({ row }) => (
-				<div className="overflow-x-auto">{row.getValue("tinggi")}</div>
+				<div className="overflow-x-auto">{row.getValue("tinggi")}m</div>
 			),
 		},
 		{
@@ -81,7 +81,7 @@ const PageAdmin = () => {
 			header: "Berat",
 			accessorFn: (row) => row.berat,
 			cell: ({ row }) => (
-				<div className="overflow-x-auto">{row.getValue("berat")}</div>
+				<div className="overflow-x-auto">{row.getValue("berat")}kg</div>
 			),
 		},
 		{

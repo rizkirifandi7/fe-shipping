@@ -57,8 +57,10 @@ export const logoutAction = async () => {
 		// Hapus cookie token
 		await removeCookie("token");
 
-		// Redirect ke halaman login
-		redirect("/login");
+		// Redirect ke halaman login (client-side)
+		if (typeof window !== "undefined") {
+			window.location.href = "/login";
+		}
 	} catch (error) {
 		console.error("Logout failed:", error);
 		throw error;

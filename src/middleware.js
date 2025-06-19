@@ -40,7 +40,7 @@ export async function middleware(request) {
 		const isAdminRoute = adminRoutes.some((route) =>
 			pathname.startsWith(route)
 		);
-		if (isAdminRoute && userRole !== "admin") {
+		if (isAdminRoute && userRole !== "admin" && userRole !== "manager") {
 			return NextResponse.redirect(new URL("/unauthorized", request.url));
 		}
 	}

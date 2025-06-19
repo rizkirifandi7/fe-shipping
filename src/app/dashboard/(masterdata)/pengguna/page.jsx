@@ -72,7 +72,7 @@ const PageAdmin = () => {
 
 			const result = await response.json();
 
-			const filterRole = result.data.filter((item) => item.role === "admin");
+			const filterRole = result.data.filter((item) => item.role !== "driver");
 
 			setData(filterRole);
 		} catch (err) {
@@ -94,7 +94,7 @@ const PageAdmin = () => {
 			isLoading={isLoading}
 			error={error}
 			TambahComponent={<TambahAdmin onSuccess={fetchData} />}
-			title="Dashboard Admin"
+			title="Dashboard Pengguna"
 		/>
 	);
 };

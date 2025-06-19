@@ -13,13 +13,13 @@ export const dataNavLink = {
 			title: "Dashboard",
 			url: "/dashboard/home",
 			icon: House,
-			allowedRoles: ["admin", "driver"],
+			allowedRoles: ["admin", "driver", "manager"],
 		},
 		{
 			title: "Manajemen Pesanan",
 			url: "/dashboard/pesanan",
 			icon: Box,
-			allowedRoles: ["admin"],
+			allowedRoles: ["manager"],
 		},
 		{
 			title: "Dokumen Pengiriman",
@@ -31,17 +31,17 @@ export const dataNavLink = {
 			title: "Jadwal Pengiriman",
 			url: "#",
 			icon: CalendarCheck2,
-			allowedRoles: ["admin"],
+			allowedRoles: ["manager"],
 			items: [
 				{
 					title: "Jadwal Pengiriman",
 					url: "/dashboard/jadwal",
-					allowedRoles: ["admin"],
+					allowedRoles: ["manager"],
 				},
 				{
 					title: "Jadwal Pengiriman Driver",
 					url: "/dashboard/jadwal-driver",
-					allowedRoles: ["admin"],
+					allowedRoles: ["manager"],
 				},
 			],
 		},
@@ -52,8 +52,8 @@ export const dataNavLink = {
 			allowedRoles: ["admin"],
 			items: [
 				{
-					title: "Admin",
-					url: "/dashboard/admin",
+					title: "Pengguna",
+					url: "/dashboard/pengguna",
 					allowedRoles: ["admin"],
 				},
 				{
